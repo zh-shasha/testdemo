@@ -25,10 +25,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 btn.setVisibility(View.GONE);
-                TestFragment testFragment = new TestFragment();
+                testFragment = new TestFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("data", "5");
                 testFragment.setArguments(bundle);//数据传递到fragment中
+                testFragment.setTimerOnFinishCallBack(new TimerOnFinishCallBack() {
+                    @Override
+                    public void onFinish() {
+                        FragmentManager fm = getSupportFragmentManager();
+                        FragmentTransaction transaction = fm.beginTransaction();
+                        transaction.remove(testFragment);
+                        transaction.commit();
+                        btn.setVisibility(View.VISIBLE);
+                        btn.setText("结束");
+
+                    }
+                });
 
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
@@ -42,10 +54,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        //从Intent当中根据key取得value
-        if (intent != null) {
-            String btn = intent.getStringExtra("text");
-        }
     }
 }

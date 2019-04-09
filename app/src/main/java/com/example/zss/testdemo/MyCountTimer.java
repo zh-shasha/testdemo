@@ -8,6 +8,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
 public class MyCountTimer extends CountDownTimer {
+    private TimerOnFinishCallBack timerOnFinishCallBack;
     public static final int TIME_COUNT = 31000;//倒计时总时间为31S，时间防止从29s开始显示（以倒计时30s为例子）
     private TextView btn;
     private String endStrRid;
@@ -33,6 +34,10 @@ public class MyCountTimer extends CountDownTimer {
         this.endStrRid = endStrRid;
     }
 
+    public void setTimerOnFinishCallBack(TimerOnFinishCallBack timerOnFinishCallBack) {
+        this.timerOnFinishCallBack = timerOnFinishCallBack;
+    }
+
     /**
      * 计时完毕时触发
      */
@@ -40,6 +45,7 @@ public class MyCountTimer extends CountDownTimer {
     public void onFinish() {
         btn.setText(endStrRid);
         btn.setEnabled(true);
+        timerOnFinishCallBack.onFinish();
 
     }
 
@@ -53,7 +59,7 @@ public class MyCountTimer extends CountDownTimer {
         btn.setText(millisUntilFinished / 1000+"");
 
         // 设置透明度渐变动画
-        final AlphaAnimation alphaAnimation = new AlphaAnimation(0, (float) 0.4);
+        final AlphaAnimation alphaAnimation = new AlphaAnimation(1, (float) 0.4);
         //设置动画持续时间
         alphaAnimation.setDuration(1000);
         btn.startAnimation(alphaAnimation);
@@ -65,3 +71,4 @@ public class MyCountTimer extends CountDownTimer {
         btn.startAnimation(scaleAnimation);
     }
 }
+
