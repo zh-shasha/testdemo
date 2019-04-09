@@ -34,6 +34,8 @@ public class TestFragment extends Fragment {
         tv.setText(mess);
         MyCountTimer myCountTimer = new MyCountTimer(6000, 1000, tv, "");
         myCountTimer.start();
+
+
         Intent intent=new Intent(getContext(),MainActivity.class);
         intent.putExtra("text1","结束");
         startActivity(intent);

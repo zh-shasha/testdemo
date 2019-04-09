@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 btn.setVisibility(View.GONE);
                 TestFragment testFragment = new TestFragment();
                 Bundle bundle = new Bundle();
